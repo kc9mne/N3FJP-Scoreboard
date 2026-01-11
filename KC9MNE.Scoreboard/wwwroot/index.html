@@ -1,0 +1,231 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>KC9MNE Scoreboard</title>
+
+  <!-- Offline/local copies -->
+  <script src="/lib/chart.umd.min.js"></script>
+  <script src="/lib/signalr.min.js"></script>
+
+  <style>
+    body { font-family: sans-serif; margin: 16px; background:#fafafa; }
+
+    /* === POWER BI STYLE GRID === */
+    .page {
+      display: grid;
+      grid-template-columns: 420px 420px 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .col {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 16px;
+      min-height: calc(100vh - 32px);
+    }
+
+    .colRight {
+      display: grid;
+      grid-template-rows: auto auto auto;
+      gap: 16px;
+      min-height: calc(100vh - 32px);
+    }
+
+    .card {
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 12px;
+      background: #fff;
+    }
+
+    .big { font-size: 64px; font-weight: 800; line-height: 1; }
+    .muted { color: #666; }
+
+    /* Chart sizing */
+    .chartWrap { position: relative; width: 100%; }
+    .tallChart { height: calc(100vh - 240px); }
+    .shortChart { height: 260px; }
+    canvas { width: 100% !important; height: 100% !important; }
+
+    /* Header / mascot */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 200px;
+      gap: 12px;
+      align-items: center;
+    }
+    .hero h1 { margin: 0; font-size: 36px; line-height: 1.1; }
+    .hero .sub { margin-top: 6px; color:#444; }
+    .hero img { width: 100%; border-radius: 12px; border:1px solid #eee; }
+
+.right-float {
+    float: right;
+    overflow: hidden;
+    padding: 5px;
+}
+
+.left-float {
+    float: left;
+    padding: 5px;
+}
+
+.mascotcard {
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      height: 213px;
+      padding: 5px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+.mascotcard h1 { margin: 0; font-size: 30px; line-height: 1.2; }
+  </style>
+</head>
+
+<body>
+<div class="page">
+
+  <!-- COLUMN 1 head: TOTAL + CONTACTS BY OPERATOR -->
+  <div class="col">
+    <div class="card">
+      <h1>N9WH</h1>
+      <div class="muted">Total Contacts</div>
+      <div id="totalContacts" class="big">—</div>
+      <div>Total Points: <b id="totalPoints">—</b></div>
+      <div class="muted">Updated: <span id="updated">—</span></div>
+    </div>
+
+<!-- COLUMN 1: TOTAL + CONTACTS BY OPERATOR -->
+    <div class="card">
+      <b>Contacts by Operator</b>
+      <div class="chartWrap tallChart">
+        <canvas id="opChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+<!-- COLUMN 2 head: TOTAL + CONTACTS BY OPERATOR -->
+  <div class="col">
+    <div class="mascotcard">
+        <div class="left-float">
+          <h1>Winter</h1>
+          <h1>Field Day</h1>
+          <h1>Live Stats!</h1>
+          <div class="muted">by: KC9MNE</div>
+        </div>
+        <div class="right-float">
+        <img src="/mascot.png" alt="Description" style="float: right; margin-left: 5px;" width="210" height="auto"></div>
+      </div>
+
+  <!-- COLUMN 2: POINTS BY OPERATOR (NOW SAME WIDTH) -->
+    <div class="card">
+      <b>Points by Operator</b>
+      <div class="chartWrap tallChart">
+        <canvas id="ptsChart"></canvas>
+      </div>
+    </div>
+    </div>
+
+  <!-- COLUMN 3: HEADER + MODE + COUNTRY -->
+  <div class="colRight">
+
+    <div class="card">
+      <b>Contacts by Mode</b>
+      <div class="chartWrap shortChart">
+        <canvas id="modeChart"></canvas>
+      </div>
+    </div>
+
+    <div class="card">
+      <b>Contacts by Country</b>
+      <div class="chartWrap shortChart">
+        <canvas id="countryChart"></canvas>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  /* ================= CHARTS ================= */
+
+  const opChart = new Chart(opChartEl = document.getElementById('opChart'), {
+    type: 'bar',
+    data: { labels: [], datasets: [{ data: [] }] },
+    options: { indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}} }
+  });
+
+  const ptsChart = new Chart(document.getElementById('ptsChart'), {
+    type: 'bar',
+    data: { labels: [], datasets: [{ data: [] }] },
+    options: { indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}} }
+  });
+
+  const modeChart = new Chart(document.getElementById('modeChart'), {
+    type: 'bar',
+    data: { labels: [], datasets: [{ data: [] }] },
+    options: { responsive:true, maintainAspectRatio:false }
+  });
+
+  const countryChart = new Chart(document.getElementById('countryChart'), {
+    type: 'bar',
+    data: { labels: [], datasets: [{ data: [] }] },
+    options: { indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}} }
+  });
+
+  function applySnapshot(s) {
+    document.getElementById('totalContacts').textContent = s.totals.contacts;
+    document.getElementById('totalPoints').textContent = s.totals.points;
+    document.getElementById('updated').textContent =
+      new Date(s.meta.generatedUtc).toLocaleString();
+
+    // Graph Bars change colors  
+  function palette(n) {
+    const colors = [];
+    for (let i = 0; i < n; i++) {
+      const hue = Math.round((360 / n) * i);
+      colors.push(`hsl(${hue}, 65%, 55%)`);
+    }
+    return colors;
+  }
+
+    // Contacts by Operator
+    opChart.data.labels = s.contactsByOperator.map(x => x.Operator);
+    opChart.data.datasets[0].data = s.contactsByOperator.map(x => x.Contacts);
+    opChart.update();
+
+    // Points by Operator
+    ptsChart.data.labels = s.pointsByOperator.map(x => x.Operator);
+    ptsChart.data.datasets[0].data = s.pointsByOperator.map(x => x.Points);
+    ptsChart.update();
+
+    // Mode rollup (Phone/CW/Digital only)
+    const modeMap = { PHONE:0, CW:0, DIGITAL:0 };
+    s.contactsByMode.forEach(m => {
+      const k = m.Mode.toUpperCase();
+      if (['SSB','USB','LSB','AM','FM'].includes(k)) modeMap.PHONE += m.Contacts;
+      else if (k === 'CW') modeMap.CW += m.Contacts;
+      else modeMap.DIGITAL += m.Contacts;
+    });
+
+    modeChart.data.labels = ['Phone','CW','Digital'];
+    modeChart.data.datasets[0].data = [modeMap.PHONE, modeMap.CW, modeMap.DIGITAL];
+    modeChart.update();
+
+    // Country (top 15)
+    const countries = s.contactsByCountry.slice(0,15);
+    countryChart.data.labels = countries.map(x => x.Country);
+    countryChart.data.datasets[0].data = countries.map(x => x.Contacts);
+    countryChart.update();
+  }
+
+  fetch("/api/snapshot").then(r=>r.json()).then(applySnapshot);
+  const conn = new signalR.HubConnectionBuilder().withUrl("/hub").withAutomaticReconnect().build();
+  conn.on("snapshot", applySnapshot);
+  conn.start();
+</script>
+</body>
+</html>

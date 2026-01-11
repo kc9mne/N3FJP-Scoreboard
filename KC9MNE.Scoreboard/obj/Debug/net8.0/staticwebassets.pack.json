@@ -1,0 +1,25 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Scoreboard\\web\\KC9MNE.Scoreboard\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.KC9MNE.Scoreboard.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.KC9MNE.Scoreboard.props",
+      "PackagePath": "build\\KC9MNE.Scoreboard.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.KC9MNE.Scoreboard.props",
+      "PackagePath": "buildMultiTargeting\\KC9MNE.Scoreboard.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.KC9MNE.Scoreboard.props",
+      "PackagePath": "buildTransitive\\KC9MNE.Scoreboard.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

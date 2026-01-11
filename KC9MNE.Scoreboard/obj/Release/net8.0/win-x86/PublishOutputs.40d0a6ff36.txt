@@ -1,0 +1,4 @@
+C:\Scoreboard\web\KC9MNE.Scoreboard\bin\Release\net8.0\win-x86\publish\appsettings.Development.json
+C:\Scoreboard\web\KC9MNE.Scoreboard\bin\Release\net8.0\win-x86\publish\appsettings.json
+C:\Scoreboard\web\KC9MNE.Scoreboard\bin\Release\net8.0\win-x86\publish\KC9MNE.Scoreboard.pdb
+C:\Scoreboard\web\KC9MNE.Scoreboard\bin\Release\net8.0\win-x86\publish\KC9MNE.Scoreboard.exe

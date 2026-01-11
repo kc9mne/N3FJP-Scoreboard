@@ -1,0 +1,39 @@
+{
+  "Version": 1,
+  "Hash": "oXBgn651yn0/m80QbY3LAVia/Q9zU4/uwb1tUFIZUgo=",
+  "Source": "KC9MNE.Scoreboard",
+  "BasePath": "_content/KC9MNE.Scoreboard",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "KC9MNE.Scoreboard\\wwwroot",
+      "Source": "KC9MNE.Scoreboard",
+      "ContentRoot": "C:\\Scoreboard\\web\\KC9MNE.Scoreboard\\wwwroot\\",
+      "BasePath": "_content/KC9MNE.Scoreboard",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Scoreboard\\web\\KC9MNE.Scoreboard\\wwwroot\\index.html",
+      "SourceId": "KC9MNE.Scoreboard",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Scoreboard\\web\\KC9MNE.Scoreboard\\wwwroot\\",
+      "BasePath": "_content/KC9MNE.Scoreboard",
+      "RelativePath": "index.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\index.html"
+    }
+  ]
+}

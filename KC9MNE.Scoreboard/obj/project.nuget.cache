@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "dgSpecHash": "WGffVenuGw0=",
+  "success": true,
+  "projectFilePath": "C:\\Scoreboard\\web\\KC9MNE.Scoreboard\\KC9MNE.Scoreboard.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Operator\\.nuget\\packages\\microsoft.net.illink.tasks\\8.0.22\\microsoft.net.illink.tasks.8.0.22.nupkg.sha512",
+    "C:\\Users\\Operator\\.nuget\\packages\\system.configuration.configurationmanager\\10.0.1\\system.configuration.configurationmanager.10.0.1.nupkg.sha512",
+    "C:\\Users\\Operator\\.nuget\\packages\\system.data.oledb\\10.0.1\\system.data.oledb.10.0.1.nupkg.sha512",
+    "C:\\Users\\Operator\\.nuget\\packages\\system.diagnostics.eventlog\\10.0.1\\system.diagnostics.eventlog.10.0.1.nupkg.sha512",
+    "C:\\Users\\Operator\\.nuget\\packages\\system.diagnostics.performancecounter\\10.0.1\\system.diagnostics.performancecounter.10.0.1.nupkg.sha512",
+    "C:\\Users\\Operator\\.nuget\\packages\\system.security.cryptography.protecteddata\\10.0.1\\system.security.cryptography.protecteddata.10.0.1.nupkg.sha512",
+    "C:\\Users\\Operator\\.nuget\\packages\\system.threading.accesscontrol\\10.0.1\\system.threading.accesscontrol.10.0.1.nupkg.sha512",
+    "C:\\Users\\Operator\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x86\\8.0.22\\microsoft.netcore.app.runtime.win-x86.8.0.22.nupkg.sha512",
+    "C:\\Users\\Operator\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x86\\8.0.22\\microsoft.windowsdesktop.app.runtime.win-x86.8.0.22.nupkg.sha512",
+    "C:\\Users\\Operator\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x86\\8.0.22\\microsoft.aspnetcore.app.runtime.win-x86.8.0.22.nupkg.sha512"
+  ],
+  "logs": []
+}
