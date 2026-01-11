@@ -1,7 +1,7 @@
 # N3FJP-Scoreboard
 A quick web based leader board for groups logging with N3FJP's software, designed to run on a TV at the event.
 
-![image](https://github.com/user-attachments/assets/c40fc536-4911-46d6-820d-ca8596e6ff9e)
+![image](https://github.com/kc9mne/N3FJP-Scoreboard/blob/main/screenshot.png?raw=true)
 
 What this is
 
