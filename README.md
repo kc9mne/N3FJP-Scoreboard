@@ -1,6 +1,8 @@
 # N3FJP-Scoreboard
 A quick web based leader board for groups logging with N3FJP's software, designed to run on a TV at the event.
 
+![image](https://github.com/user-attachments/assets/c40fc536-4911-46d6-820d-ca8596e6ff9e)
+
 What this is
 
 This scoreboard reads an N3FJP Log .mdb (Microsoft Access format) and serves a local web dashboard you can open from any device on your LAN (TVs, tablets, laptops).
